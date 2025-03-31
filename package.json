@@ -1,0 +1,27 @@
+{
+	"name": "recipe-pdf",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gilbertVirgo/recipe-pdf.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/gilbertVirgo/recipe-pdf/issues"
+	},
+	"homepage": "https://github.com/gilbertVirgo/recipe-pdf#readme",
+	"description": "",
+	"dependencies": {
+		"ejs": "^3.1.9",
+		"express": "^4.18.2",
+		"html-pdf-node": "^1.0.8",
+		"randomstring": "^1.3.1"
+	}
+}
