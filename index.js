@@ -3,6 +3,18 @@ const app = express();
 
 // Import routes
 const recipeRoutes = require("./routes/recipeRoutes");
+const helmet = require("helmet");
+
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 100, // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
+
+app.use(helmet());
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
@@ -15,6 +27,11 @@ app.use(express.static("public"));
 
 // Use recipe routes
 app.use("/", recipeRoutes);
+
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send("Something went wrong!");
+});
 
 // Start the server
 app.listen(process.env.PORT, () => {
