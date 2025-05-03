@@ -65,14 +65,20 @@ router.post("/pdf", async (req, res) => {
 
 	fs.writeFileSync(generatedHTMLFilePath, HTMLFileContents);
 
-	execSync(
-		"cd ~/recipe-pdf/generatedPDFs; npx html-export-pdf-cli ./" +
-			generatedFileKey +
-			".html" +
-			" -s A5 -l -o ./" +
-			generatedFileKey +
-			".pdf"
-	);
+	try {
+		execSync(
+			`cd ${process.env.ROOT_URI}/generatedPDFs; npx html-export-pdf-cli ./` +
+				generatedFileKey +
+				".html" +
+				" -s A5 -l -o ./" +
+				generatedFileKey +
+				".pdf"
+		);
+	} catch (error) {
+		console.error("Error generating PDF:", error);
+		res.status(500).send("Failed to generate PDF");
+		return;
+	}
 
 	res.setHeader("Content-Type", "application/pdf");
 	res.download(generatedPDFFilePath);

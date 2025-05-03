@@ -3,7 +3,6 @@ const app = express();
 
 // Import routes
 const recipeRoutes = require("./routes/recipeRoutes");
-const helmet = require("helmet");
 
 const rateLimit = require("express-rate-limit");
 
@@ -13,8 +12,6 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
-
-app.use(helmet());
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
