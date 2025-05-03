@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = 3000;
 
 // Import routes
 const recipeRoutes = require("./routes/recipeRoutes");
@@ -18,6 +17,6 @@ app.use(express.static("public"));
 app.use("/", recipeRoutes);
 
 // Start the server
-app.listen(port, () => {
-	console.log(`Server running at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+	console.log(`Server running at http://localhost:${process.env.PORT}`);
 });
